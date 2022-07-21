@@ -39,32 +39,28 @@ code {
   flex-direction: column;
 }
 
-.col-d1 {
-  margin-top: 1rem;
+.col-pinky {
+  margin-top: 1.5rem;
 }
 
-.col-d1-5 {
+.col-ring {
+  margin-top: 0.5rem;
+}
+
+.col-middle {
+  margin-top: 0rem;
+}
+
+.col-index {
+  margin-top: 0.5rem;
+}
+
+.col-inner {
   margin-top: 0.75rem;
 }
 
-.col-d2 {
-  margin-top: 1rem;
-}
-
-.col-d3 {
-  margin-top: 3rem;
-}
-
-.col-d4 {
-  margin-top: 2.5rem;
-}
-
-.col-d14 {
-  margin-top: 11.75rem;
-}
-
-.col-d15 {
-  margin-top: 15rem;
+.col-thumb {
+  margin-top: 11.5rem;
 }
 
 .unused {
