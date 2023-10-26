@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+
 *,
 *::before,
 *::after {
@@ -17,7 +18,7 @@ code {
 }
 
 .tippy-box {
-  font: 14px "Inconsolata", "Courier New", monospace;
+  font: 12px "JetBrains Mono", "Courier New", monospace;
 }
 
 .wrapper {
@@ -69,7 +70,7 @@ code {
 }
 
 .key {
-  font: 14px "Inconsolata", "Courier New", monospace;
+  font: 12px "JetBrains Mono", "Courier New", monospace;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -87,10 +88,6 @@ code {
   text-align: center;
   color: #333;
 }
-.key.mod {
-  background-color: #333;
-  color: #f0f0f0;
-}
 .key.combo::before {
   position: absolute;
   top: 0.25rem;
@@ -104,9 +101,22 @@ code {
   line-height: 0.8rem;
   font-weight: normal;
 }
+.key.M {
+  background-color: #333;
+  color: #f0f0f0;
+}
 .key.S {
   cursor: pointer;
   background-color: #ffe4e1;
+}
+.key.H::before {
+  position: absolute;
+  top: 1.75rem;
+  width: 1rem;
+  height: 1rem;
+  color: #222;
+  content: "__";
+  font-weight: normal;
 }
 
 .combo:hover {
