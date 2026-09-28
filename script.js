@@ -2,7 +2,7 @@ let layerBase = [
   ["Q" , "W" , "F" , "P"    , "B"      , null   , null , "J"      , "L"    , "U" , "Y" , "'"],
   ["A" , "R" , "S" , "T:H"  , "G"      , null   , null , "M"      , "N:H"  , "E" , "I" , "O"],
   ["Z" , "X" , "C" , "D"    , "V"      , null   , null , "K"      , "H"    , "," , "." , "/"],
-  [null, null, null, "NAV:M", "shift:M", "tab:M", ";:M", "space:M", "SYM:M", null, null, null]
+  [null, null, null, "NAV:M", "shift:M", "tab\nralt:M", ";:M", "space:M", "SYM:M", null, null, null]
 ]
 
 let layerNav = [
@@ -26,7 +26,6 @@ let layerFun = [
   [null      , null      , null      , "EXT:M"     , ":M"       , ":M", ":M", ":M"  , "SYM:M", null , null , null]
 ]
 
-let comboLayer = "base";
 let combos = [
   {
     "input": ["D", "H"],
@@ -68,6 +67,11 @@ let combos = [
     "input": ["X", "C", "D"],
     "output": "PASTE"
   },
+  {
+    "layer": "nav",
+    "input": ["shift:S", "ctrl:S"],
+    "output": "sticky HYPER"
+  },
 ]
 
 let colClassLeft = ["col-pinky", "col-ring", "col-middle", "col-index", "col-inner", "col-thumb"]
@@ -77,13 +81,16 @@ let colHand = ["left", "left", "left", "left", "left", "left", "right", "right",
 
 let tippyPlacements = ["top", "left", "right", "bottom"]
 
-function getCombos(layer, keyLabel) {
-  if (layer !== comboLayer) {
-    return []
-  }
+// Off the base layer, labels repeat (NAV has "shift" on two rows), so those combos name the full key text.
+function getCombos(layer, key, keyLabel) {
   let c = [];
   for (let combo of combos) {
-    if (combo.input.includes(keyLabel)) {
+    let comboLayer = combo.layer || "base"
+    if (comboLayer !== layer) {
+      continue
+    }
+    let keyName = comboLayer === "base" ? keyLabel : key
+    if (combo.input.includes(keyName)) {
       c.push(combo)
     }
   }
@@ -106,13 +113,13 @@ function renderLayout(layer, keys) {
       let keyMod = tokens[1] || ""
       let keyElement = document.createElement("span")
       keyElement.classList.add("key")
-      let key_combos = getCombos(layer, keyLabel);
+      let key_combos = getCombos(layer, key, keyLabel);
       if (key_combos.length > 0) {
         keyElement.classList.add("combo")
         for (let i = 0; i < key_combos.length; i++){
           let combo = key_combos[i];
           tippy(keyElement, {
-            content: `${combo.input.join("")} combo: ${combo.output}`,
+            content: `${combo.input.map(k => k.split(":")[0]).join(combo.layer ? "+" : "")} combo: ${combo.output}`,
             placement: tippyPlacements[i]
           })
         }
